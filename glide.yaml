@@ -1,0 +1,10 @@
+package: .
+import:
+- package: github.com/denismakogon/functions-keystonemiddleware
+  subpackages:
+  - keystone
+- package: github.com/iron-io/functions
+  version: ^0.2.17
+  subpackages:
+  - api/models
+  - api/server
