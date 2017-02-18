@@ -21,13 +21,13 @@ import (
 	"strings"
 	"encoding/json"
 	"errors"
-	"os"
 	"bytes"
-	"encoding/gob"
 )
+
 
 type KeystoneV3TokenAuth struct {
 
+	AuthURL string
 	// Project-scoped token that comes as X-Auth-Token
 	Token string
 	// Project ID that comes as X-Project-ID
@@ -36,31 +36,6 @@ type KeystoneV3TokenAuth struct {
 	ProjectDomainID string
 }
 
-func (tkv3 *KeystoneV3TokenAuth) toBytes() ([]byte, error) {
-	identity := map[string]interface{}{
-		"method": []string{"token"},
-		"token": map[string]string{"id": tkv3.Token},
-	}
-	scope := map[string]interface{}{
-		"project": map[string]interface{}{
-				"domain": map[string]string{
-					"id": tkv3.ProjectDomainID,
-				},
-				"id": tkv3.ProjectID,
-			},
-	}
-	requestData := map[string]interface{}{"auth": map[string]interface{}{
-		"identity": identity,
-		"scope": scope,
-	}}
-	var buf bytes.Buffer
-	enc := gob.NewEncoder(&buf)
-	err := enc.Encode(requestData)
-	if err != nil {
-		return nil, err
-	}
-	return buf.Bytes(), nil
-}
 
 func (tkv3 *KeystoneV3TokenAuth) Serve(ctx server.MiddlewareContext, w http.ResponseWriter, r *http.Request, app *models.App) error {
 
@@ -68,9 +43,9 @@ func (tkv3 *KeystoneV3TokenAuth) Serve(ctx server.MiddlewareContext, w http.Resp
 		r.Header.Get("X-Auth-Token"),
 		r.Header.Get("X-Project-ID"),
 		r.Header.Get("X-Domain-ID")
-	keystone_url := os.Getenv("KEYSTONE_URL")
-	token_url := strings.Join([]string{keystone_url, "auth/tokens"}, "/")
-	bytesData, err := tkv3.toBytes()
+	token_url := strings.Join([]string{tkv3.AuthURL, "auth/tokens"}, "/")
+	bytesData, err := PrepareAuthData(tkv3.Token, tkv3.ProjectID, tkv3.ProjectDomainID)
+
 	if err != nil {
 		m := map[string]string{"error": "Invalid Authorization token"}
 		json.NewEncoder(w).Encode(m)

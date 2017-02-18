@@ -18,12 +18,14 @@ import (
 	"context"
 	"github.com/iron-io/functions/api/server"
 	"github.com/denismakogon/functions-keystonemiddleware/keystone"
+	"os"
 )
 
 
 func main() {
+	keystone_url := os.Getenv("KEYSTONE_URL")
 	ctx := context.Background()
 	funcServer := server.NewFromEnv(ctx)
-	funcServer.AddMiddleware(&keystone.KeystoneV3TokenAuth{})
+	funcServer.AddMiddleware(&keystone.KeystoneV3TokenAuth{AuthURL: keystone_url})
 	funcServer.Start(ctx)
 }
