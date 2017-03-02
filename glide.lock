@@ -1,5 +1,5 @@
 hash: 6f196f258dea453ddd0fd429dcf3930c2b6ae8e01b975e607c09016b0be66614
-updated: 2017-02-18T20:58:00.871760977+02:00
+updated: 2017-03-02T13:08:35.206466114+07:00
 imports:
 - name: github.com/amir/raidman
   version: c74861fe6a7bb8ede0a010ce4485bdbb4fc4c985
@@ -72,7 +72,7 @@ imports:
 - name: github.com/fsnotify/fsnotify
   version: fd9ec7deca8bf46ecd2a795baaacf2b3a9be1197
 - name: github.com/fsouza/go-dockerclient
-  version: 3b9b11873c06d9c8d32c51fb2f51a4c3f52fe4a6
+  version: e7f475826ee394de3153d2e342a2f235428fde98
 - name: github.com/garyburd/redigo
   version: 0708def8b0cf3a05acdf44a7f28b864c2958921d
   subpackages:
@@ -131,12 +131,13 @@ imports:
   subpackages:
   - registry
 - name: github.com/iron-io/functions
-  version: 2890b909b1cbf36da29a331a4daeddc6439ad4db
+  version: 947fedb194b5d5edd58be457e0e644012915192a
   subpackages:
   - api
   - api/datastore
   - api/datastore/bolt
   - api/datastore/postgres
+  - api/datastore/redis
   - api/models
   - api/mqs
   - api/runner
@@ -144,6 +145,7 @@ imports:
   - api/runner/task
   - api/server
   - api/server/internal/routecache
+  - api/version
 - name: github.com/iron-io/iron_go3
   version: b50ecf8ff90187fc5fabccd9d028dd461adce4ee
   subpackages:
@@ -165,7 +167,7 @@ imports:
 - name: github.com/magiconair/properties
   version: 9c47895dc1ce54302908ab8a43385d1f5df2c11c
 - name: github.com/mailru/easyjson
-  version: 9d6630dc8c577b56cb9687a9cf9e8578aca7298a
+  version: 159cdb893c982e3d1bc6450322fedd514f9c9de3
   subpackages:
   - buffer
   - jlexer
@@ -177,9 +179,9 @@ imports:
 - name: github.com/Microsoft/go-winio
   version: 24a3e3d3fc7451805e09d11e11e95d9a0a4f205e
 - name: github.com/mitchellh/mapstructure
-  version: bfdb1a85537d60bc7e954e600c250219ea497417
+  version: f3009df150dadf309fdee4a54ed65c124afad715
 - name: github.com/opencontainers/runc
-  version: 083933fb9092a3d65d682ba34a08676104c95462
+  version: 8893fa693bf9bf29e5a156369bc51b887df43924
   subpackages:
   - libcontainer/system
   - libcontainer/user
@@ -196,7 +198,7 @@ imports:
 - name: github.com/satori/go.uuid
   version: 879c5887cd475cd7864858769793b2ceb0d44feb
 - name: github.com/Sirupsen/logrus
-  version: c078b1e43f58d563c74cebe63c85789e76ddb627
+  version: 0208149b40d863d2c1a2f8fe5753096a9cf2cc8b
   subpackages:
   - hooks/syslog
 - name: github.com/spf13/afero
@@ -219,12 +221,12 @@ imports:
   - idna
   - proxy
 - name: golang.org/x/sys
-  version: 478fcf54317e52ab69f40bb4c7a1520288d7f7ea
+  version: d5645953809d8b4752afb2c3224b1f1ad73dfa70
   subpackages:
   - unix
   - windows
 - name: golang.org/x/text
-  version: 47a200a05c8b3fd1b698571caecbb68beb2611ec
+  version: 5c6cf4f9a2357d38515014cea8c488ed22bdab90
   subpackages:
   - transform
   - unicode/norm
